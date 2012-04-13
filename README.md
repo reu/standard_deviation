@@ -31,6 +31,12 @@ For population standard deviation, call `stdevp`:
 [1, 2, 3, 4, 5].stdevp => 1.4142135623730951
 ```
 
+Also, the API exposes the `sample_variance` and `population_variance` calculations:
+``` ruby
+[1, 2, 3, 4, 5].sample_variance => 2.5
+[1, 2, 3, 4, 5].population_variance => 2.0
+```
+
 ## Benchmarks
 
 ``` ruby
