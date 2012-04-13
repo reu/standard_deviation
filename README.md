@@ -28,7 +28,7 @@ Just call `standard_deviation` or `stdev` on an array with numbers:
 For population standard deviation, call `stdevp`:
 
 ``` ruby
-[1, 2, 3, 4, 5].stdevp => 1.4142135623731
+[1, 2, 3, 4, 5].stdevp => 1.4142135623730951
 ```
 
 ## Benchmarks
