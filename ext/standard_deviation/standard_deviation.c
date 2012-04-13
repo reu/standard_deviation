@@ -62,5 +62,5 @@ static VALUE stdevp(VALUE self) {
 void Init_standard_deviation() {
   rb_define_method(rb_cArray, "stdev", stdev, 0);
   rb_define_alias(rb_cArray, "standard_deviation", "stdev");
-  rb_define_method(rb_cArray, "stdevp", stdev, 0);
+  rb_define_method(rb_cArray, "stdevp", stdevp, 0);
 }
