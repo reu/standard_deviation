@@ -39,9 +39,9 @@ class Array
   def stdev_ruby
     total = inject :+
     mean  = total.to_f / size
-    variance = inject(0) { |variance, value| variance + (value - mean) ** 2 }
+    variance = inject(0) { |variance, value| variance + (value - mean) ** 2 } / (size - 1)
 
-    Math.sqrt(variance / (size - 1))
+    Math.sqrt(variance)
   end
 end
 
