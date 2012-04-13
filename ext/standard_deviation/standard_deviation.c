@@ -29,8 +29,12 @@ static double sample_variance(VALUE *array, int size) {
   return distance_from_mean(array, size) / (size - 1);
 }
 
+static double population_variance(VALUE *array, int size) {
+  return distance_from_mean(array, size) / size;
+}
+
 static VALUE stdev(VALUE self) {
-  int i, size;
+  int size;
 
   size  = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
@@ -39,24 +43,12 @@ static VALUE stdev(VALUE self) {
 }
 
 static VALUE stdevp(VALUE self) {
-  int i, size;
-  double total, mean, variance;
+  int size;
 
   size  = RARRAY_LEN(self);
-  total = variance = 0;
   VALUE *array = RARRAY_PTR(self);
 
-  for (i = 0; i < size; i++) {
-    total += NUM2DBL(array[i]);
-  }
-
-  mean = total / size;
-
-  for (i = 0; i < size; i++) {
-    variance += pow((NUM2DBL(array[i]) - mean), 2);
-  }
-
-  return rb_float_new(sqrt(variance / size));
+  return rb_float_new(sqrt(population_variance(array, size)));
 }
 
 void Init_standard_deviation() {
