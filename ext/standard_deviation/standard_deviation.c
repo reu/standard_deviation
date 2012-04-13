@@ -12,17 +12,21 @@ static double sum(VALUE *array, int size) {
   return total;
 }
 
-static double sample_variance(VALUE *array, int size) {
+static double distance_from_mean(VALUE *array, int size) {
   int i;
-  double mean, variance;
+  double mean, distance;
 
   mean = sum(array, size) / size;
 
-  for (i = 0, variance = 0; i < size; i++) {
-    variance += pow((NUM2DBL(array[i]) - mean), 2);
+  for (i = 0, distance = 0; i < size; i++) {
+    distance += pow((NUM2DBL(array[i]) - mean), 2);
   }
 
-  return variance / (size - 1);
+  return distance;
+}
+
+static double sample_variance(VALUE *array, int size) {
+  return distance_from_mean(array, size) / (size - 1);
 }
 
 static VALUE stdev(VALUE self) {
