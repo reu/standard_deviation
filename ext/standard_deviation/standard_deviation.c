@@ -33,9 +33,15 @@ static double compute_population_variance(VALUE *array, int size) {
   return distance_from_mean(array, size) / size;
 }
 
+static void raise_not_enough_elements() {
+  rb_raise(rb_eZeroDivError, "not enough elements");
+}
+
 static VALUE sample_variance(VALUE self) {
   int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
+
+  if (size < 2) raise_not_enough_elements();
 
   return rb_float_new(compute_sample_variance(array, size));
 }
@@ -44,6 +50,8 @@ static VALUE population_variance(VALUE self) {
   int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
+  if (size < 2) raise_not_enough_elements();
+
   return rb_float_new(compute_population_variance(array, size));
 }
 
@@ -51,12 +59,16 @@ static VALUE stdev(VALUE self) {
   int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
+  if (size < 2) raise_not_enough_elements();
+
   return rb_float_new(sqrt(compute_sample_variance(array, size)));
 }
 
 static VALUE stdevp(VALUE self) {
   int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
+
+  if (size < 2) raise_not_enough_elements();
 
   return rb_float_new(sqrt(compute_population_variance(array, size)));
 }
