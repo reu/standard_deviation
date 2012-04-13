@@ -1,7 +1,7 @@
 #include <ruby.h>
 #include <math.h>
 
-double sum(VALUE *array, int size) {
+static double sum(VALUE *array, int size) {
   int i;
   double total = 0;
 
@@ -12,23 +12,26 @@ double sum(VALUE *array, int size) {
   return total;
 }
 
-static VALUE stdev(VALUE self) {
-  int i, size;
+static double sample_variance(VALUE *array, int size) {
+  int i;
   double mean, variance;
-
-  size  = RARRAY_LEN(self);
-  variance = 0;
-  VALUE *array = RARRAY_PTR(self);
 
   mean = sum(array, size) / size;
 
-  for (i = 0; i < size; i++) {
+  for (i = 0, variance = 0; i < size; i++) {
     variance += pow((NUM2DBL(array[i]) - mean), 2);
   }
 
-  variance = variance / (size - 1);
+  return variance / (size - 1);
+}
 
-  return rb_float_new(sqrt(variance));
+static VALUE stdev(VALUE self) {
+  int i, size;
+
+  size  = RARRAY_LEN(self);
+  VALUE *array = RARRAY_PTR(self);
+
+  return rb_float_new(sqrt(sample_variance(array, size)));
 }
 
 static VALUE stdevp(VALUE self) {
