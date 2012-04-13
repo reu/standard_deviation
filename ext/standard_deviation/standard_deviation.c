@@ -34,18 +34,14 @@ static double population_variance(VALUE *array, int size) {
 }
 
 static VALUE stdev(VALUE self) {
-  int size;
-
-  size  = RARRAY_LEN(self);
+  int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   return rb_float_new(sqrt(sample_variance(array, size)));
 }
 
 static VALUE stdevp(VALUE self) {
-  int size;
-
-  size  = RARRAY_LEN(self);
+  int size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   return rb_float_new(sqrt(population_variance(array, size)));
