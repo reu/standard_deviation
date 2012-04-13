@@ -18,12 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-Just call `standard_deviation` or `stdev` on a array with numbers.
+Just call `standard_deviation` or `stdev` on an array with numbers:
 
 ``` ruby
 [1, 2, 3, 4, 5].stdev => 1.5811388300841898
 
 [521.0, BigDecimal("1234.45"), 1_120].standard_deviation => 383.168958598336
+```
+For population standard deviation, call `stdevp`:
+
+``` ruby
+[1, 2, 3, 4, 5].stdevp => 1.4142135623731
 ```
 
 ## Benchmarks
