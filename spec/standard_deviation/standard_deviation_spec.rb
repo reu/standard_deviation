@@ -13,24 +13,26 @@ describe Array do
     end
   end
 
-  describe "#stdev" do
-    subject { values.stdev }
+  %w(stdev standard_deviation).each do |method|
+    describe "##{method}" do
+      subject { values.send method }
 
-    it_should_behave_like "a serie calculation"
+      it_should_behave_like "a serie calculation"
 
-    context "with integer values" do
-      let(:values) { [1, 2, 6, 3, -4, 23] }
-      it { should == 9.32559202767667 }
-    end
+      context "with integer values" do
+        let(:values) { [1, 2, 6, 3, -4, 23] }
+        it { should == 9.32559202767667 }
+      end
 
-    context "with float values" do
-      let(:values) { [1.0, 2.0, 6.0, 3.0, -4.0, 23.0] }
-      it { should == 9.32559202767667 }
-    end
+      context "with float values" do
+        let(:values) { [1.0, 2.0, 6.0, 3.0, -4.0, 23.0] }
+        it { should == 9.32559202767667 }
+      end
 
-    context "with bigdecimal values" do
-      let(:values) { [BigDecimal("1.0"), BigDecimal("2.0"), BigDecimal("6.0"), BigDecimal("3.0"), BigDecimal("-4.0"), BigDecimal("23.0")] }
-      it { should == 9.32559202767667 }
+      context "with bigdecimal values" do
+        let(:values) { [BigDecimal("1.0"), BigDecimal("2.0"), BigDecimal("6.0"), BigDecimal("3.0"), BigDecimal("-4.0"), BigDecimal("23.0")] }
+        it { should == 9.32559202767667 }
+      end
     end
   end
 
@@ -55,24 +57,26 @@ describe Array do
     end
   end
 
-  describe "#sample_variance" do
-    subject { values.sample_variance }
+  %w(variance sample_variance).each do |method|
+    describe "##{method}" do
+      subject { values.send method }
 
-    it_should_behave_like "a serie calculation"
+      it_should_behave_like "a serie calculation"
 
-    context "with integer values" do
-      let(:values) { [1, 2, 6, 3, -4, 23] }
-      it { should == 86.96666666666665 }
-    end
+      context "with integer values" do
+        let(:values) { [1, 2, 6, 3, -4, 23] }
+        it { should == 86.96666666666665 }
+      end
 
-    context "with float values" do
-      let(:values) { [1.0, 2.0, 6.0, 3.0, -4.0, 23.0] }
-      it { should == 86.96666666666665 }
-    end
+      context "with float values" do
+        let(:values) { [1.0, 2.0, 6.0, 3.0, -4.0, 23.0] }
+        it { should == 86.96666666666665 }
+      end
 
-    context "with bigdecimal values" do
-      let(:values) { [BigDecimal("1.0"), BigDecimal("2.0"), BigDecimal("6.0"), BigDecimal("3.0"), BigDecimal("-4.0"), BigDecimal("23.0")] }
-      it { should == 86.96666666666665 }
+      context "with bigdecimal values" do
+        let(:values) { [BigDecimal("1.0"), BigDecimal("2.0"), BigDecimal("6.0"), BigDecimal("3.0"), BigDecimal("-4.0"), BigDecimal("23.0")] }
+        it { should == 86.96666666666665 }
+      end
     end
   end
 
