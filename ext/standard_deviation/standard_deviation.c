@@ -1,7 +1,7 @@
 #include <ruby.h>
 #include <math.h>
 
-static double sum(VALUE *array, int size) {
+static double sum(VALUE *array, long size) {
   int i;
   double total = 0;
 
@@ -12,7 +12,7 @@ static double sum(VALUE *array, int size) {
   return total;
 }
 
-static double distance_from_mean(VALUE *array, int size) {
+static double distance_from_mean(VALUE *array, long size) {
   int i;
   double mean, distance;
 
@@ -25,11 +25,11 @@ static double distance_from_mean(VALUE *array, int size) {
   return distance;
 }
 
-static double compute_sample_variance(VALUE *array, int size) {
+static double compute_sample_variance(VALUE *array, long size) {
   return distance_from_mean(array, size) / (size - 1);
 }
 
-static double compute_population_variance(VALUE *array, int size) {
+static double compute_population_variance(VALUE *array, long size) {
   return distance_from_mean(array, size) / size;
 }
 
@@ -38,7 +38,7 @@ static void raise_not_enough_elements() {
 }
 
 static VALUE sample_variance(VALUE self) {
-  int size = RARRAY_LEN(self);
+  long size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   if (size < 2) raise_not_enough_elements();
@@ -47,7 +47,7 @@ static VALUE sample_variance(VALUE self) {
 }
 
 static VALUE population_variance(VALUE self) {
-  int size = RARRAY_LEN(self);
+  long size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   if (size < 2) raise_not_enough_elements();
@@ -56,7 +56,7 @@ static VALUE population_variance(VALUE self) {
 }
 
 static VALUE stdev(VALUE self) {
-  int size = RARRAY_LEN(self);
+  long size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   if (size < 2) raise_not_enough_elements();
@@ -65,7 +65,7 @@ static VALUE stdev(VALUE self) {
 }
 
 static VALUE stdevp(VALUE self) {
-  int size = RARRAY_LEN(self);
+  long size = RARRAY_LEN(self);
   VALUE *array = RARRAY_PTR(self);
 
   if (size < 2) raise_not_enough_elements();
