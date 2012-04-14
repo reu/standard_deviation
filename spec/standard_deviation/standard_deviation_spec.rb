@@ -4,12 +4,12 @@ describe Array do
   shared_examples_for "a serie calculation" do
     context "when called on a empty array" do
       let(:values) { [] }
-      it { -> { subject }.should raise_exception ZeroDivisionError, "not enough elements" }
+      it { lambda { subject }.should raise_exception ZeroDivisionError, "not enough elements" }
     end
 
     context "when called on a array with only one element" do
       let(:values) { [1] }
-      it { -> { subject }.should raise_exception ZeroDivisionError, "not enough elements" }
+      it { lambda { subject }.should raise_exception ZeroDivisionError, "not enough elements" }
     end
   end
 
