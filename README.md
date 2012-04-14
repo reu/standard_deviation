@@ -2,6 +2,8 @@
 
 An implementation of the standard deviation calculation in C, with much better performance (50x-100x) than using pure ruby.
 
+[![Build Status](https://secure.travis-ci.org/reu/fonte.png)](http://travis-ci.org/reu/standard_deviation)
+
 ## Installation
 
 Add this line to your application's Gemfile:
