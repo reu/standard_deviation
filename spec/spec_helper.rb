@@ -3,6 +3,6 @@ require "bigdecimal"
 
 RSpec::Matchers.define :be_close_to do |expected|
   match do |actual|
-    actual.round(10) == expected.round(10)
+    BigDecimal.new(actual.to_s).round(10) == BigDecimal.new(expected.to_s).round(10)
   end
 end
