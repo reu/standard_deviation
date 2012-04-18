@@ -21,7 +21,7 @@ static double distance_from_mean(VALUE *array, long size) {
     values[i] = NUM2DBL(array[i]);
   }
 
-  mean = sum(values, size) / size;
+  mean = sum(&values, size) / size;
 
   for (i = 0, distance = 0; i < size; i++) {
     distance += pow(values[i] - mean, 2);
