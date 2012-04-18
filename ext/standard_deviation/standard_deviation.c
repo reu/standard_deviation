@@ -1,29 +1,20 @@
 #include <ruby.h>
 #include <math.h>
 
-static double sum(double array[], long size) {
-  int i;
-  double total = 0;
-
-  for (i = 0; i < size; i++) {
-    total += array[i];
-  }
-
-  return total;
-}
-
 static double distance_from_mean(VALUE *array, long size) {
   int i;
-  double mean, distance;
+  double mean, distance, total = 0;
   double values[size];
 
   for (i = 0; i < size; i++) {
-    values[i] = NUM2DBL(array[i]);
+    double value = NUM2DBL(array[i]);
+    values[i] = value;
+    total += value;
   }
 
-  mean = sum(&values, size) / size;
+  mean = total / size;
 
-  for (i = 0, distance = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     distance += pow(values[i] - mean, 2);
   }
 
