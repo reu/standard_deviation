@@ -3,18 +3,31 @@
 
 static double distance_from_mean(VALUE *array, long size) {
   int i;
-  double mean, distance, total = 0;
+  double mean, distance, total;
   double values[size];
 
-  for (i = 0; i < size; i++) {
-    double value = NUM2DBL(array[i]);
+  for (i = 0, total = 0; i < size; i++) {
+    double value;
+
+    switch (TYPE(array[i])) {
+      case T_FIXNUM:
+        value = FIX2INT(array[i]);
+        break;
+      case T_BIGNUM:
+        value = FIX2LONG(array[i]);
+        break;
+      default:
+        value = NUM2DBL(array[i]);
+        break;
+    }
+
     values[i] = value;
     total += value;
   }
 
   mean = total / size;
 
-  for (i = 0; i < size; i++) {
+  for (i = 0, distance = 0; i < size; i++) {
     distance += pow(values[i] - mean, 2);
   }
 
