@@ -11,11 +11,7 @@ static double distance_from_mean(VALUE *array, long size) {
 
     switch (TYPE(array[i])) {
       case T_FIXNUM:
-        value = FIX2INT(array[i]);
-        break;
-      case T_BIGNUM:
         value = FIX2LONG(array[i]);
-        break;
       default:
         value = NUM2DBL(array[i]);
         break;
