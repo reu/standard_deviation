@@ -83,11 +83,15 @@ static VALUE stdevp(VALUE self) {
 }
 
 void Init_standard_deviation() {
-  rb_define_method(rb_cArray, "stdev", stdev, 0);
-  rb_define_alias(rb_cArray, "standard_deviation", "stdev");
-  rb_define_method(rb_cArray, "stdevp", stdevp, 0);
+  VALUE mStandardDeviation = rb_define_module("StandardDeviation");
 
-  rb_define_method(rb_cArray, "sample_variance", sample_variance, 0);
-  rb_define_alias(rb_cArray, "variance", "sample_variance");
-  rb_define_method(rb_cArray, "population_variance", population_variance, 0);
+  rb_define_method(mStandardDeviation, "stdev", stdev, 0);
+  rb_define_alias(mStandardDeviation,  "standard_deviation", "stdev");
+  rb_define_method(mStandardDeviation, "stdevp", stdevp, 0);
+
+  rb_define_method(mStandardDeviation, "sample_variance", sample_variance, 0);
+  rb_define_alias(mStandardDeviation,  "variance", "sample_variance");
+  rb_define_method(mStandardDeviation, "population_variance", population_variance, 0);
+
+  rb_include_module(rb_cArray, mStandardDeviation);
 }
